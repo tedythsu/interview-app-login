@@ -1,0 +1,25 @@
+.login-title {
+  font-size: 1.7rem;
+  padding: 8px 11px 22px;
+  color: rgb(110,144,170);
+}
+
+.login-input {
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}

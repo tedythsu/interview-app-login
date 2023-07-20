@@ -2,28 +2,54 @@
 
   <div class="login-title">會員登入</div>
 
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
-      <nz-form-control nzErrorTip="必填欄位">
-        <nz-input-group [nzAddOnAfter]="suffixTemplate">
-          <input class="login-input" nzBorderless type="text" nz-input formControlName="userName" placeholder="請輸入帳號" />
+      <nz-form-control [nzErrorTip]="loginFormErrorTips.account">
+        <nz-input-group [nzAddOnAfter]="accountIconTemplate">
+          <input class="login-input" nzBorderless [type]="accountVisible ? 'text' : 'password'" nz-input formControlName="account" placeholder="請輸入帳號" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="請輸入6-20碼英數符號">
-        <nz-input-group [nzAddOnAfter]="suffixTemplate">
-          <input class="login-input" nzBorderless type="text" nz-input formControlName="userName" placeholder="請輸入使用者名稱" />
+      <nz-form-control [nzErrorTip]="loginFormErrorTips.userName">
+        <nz-input-group [nzAddOnAfter]="userNameIconTemplate">
+          <input class="login-input" nzBorderless [type]="userNameVisible ? 'text' : 'password'" nz-input formControlName="userName" placeholder="請輸入使用者名稱" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="請輸入8-12碼英數符號">
-        <nz-input-group [nzAddOnAfter]="suffixTemplate">
+      <nz-form-control [nzErrorTip]="loginFormErrorTips.password">
+        <nz-input-group [nzAddOnAfter]="passwordIconTemplate">
           <input class="login-input" nzBorderless [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="請輸入密碼" />
         </nz-input-group>
 
-        <ng-template #suffixTemplate>
+        <ng-template #accountIconTemplate>
+          <div class="input-icon">
+            <span
+            nz-icon
+            [nzType]="accountVisible ? 'eye-invisible' : 'eye'"
+            nzTheme="fill"
+            style="color: #848583"
+            (click)="accountVisible = !accountVisible"
+          ></span>
+          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+          </div>
+        </ng-template>
+
+        <ng-template #userNameIconTemplate>
+          <div class="input-icon">
+            <span
+            nz-icon
+            [nzType]="userNameVisible ? 'eye-invisible' : 'eye'"
+            nzTheme="fill"
+            style="color: #848583"
+            (click)="userNameVisible = !userNameVisible"
+          ></span>
+          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+          </div>
+        </ng-template>
+
+        <ng-template #passwordIconTemplate>
           <div class="input-icon">
             <span
             nz-icon
@@ -32,7 +58,7 @@
             style="color: #848583"
             (click)="passwordVisible = !passwordVisible"
           ></span>
-          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #FFFFFF"></span>
           </div>
         </ng-template>
 

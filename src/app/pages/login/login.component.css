@@ -1,11 +1,14 @@
 .login-title {
   font-size: 1.7rem;
-  padding: 8px 11px 22px;
+  padding: 8px 0px 22px;
   color: rgb(110,144,170);
 }
 
-.login-input {
+.ant-input-affix-wrapper.login-input {
+  border: none;
   border-bottom: 1px solid #d4d4d4;
+  border-radius: 0;
+  padding-left: 0;
 }
 
 .login-form {

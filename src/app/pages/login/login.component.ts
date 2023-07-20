@@ -8,6 +8,8 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators, FormGroup } from '@an
 })
 export class LoginComponent implements OnInit {
   validateForm!: UntypedFormGroup;
+  passwordVisible = false;
+  password?: string;
 
   submitForm(): void {
     if (this.validateForm.valid) {

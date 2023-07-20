@@ -5,16 +5,24 @@
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="請輸入6-20碼英數符號">
-        <nz-input-group>
+        <nz-input-group [nzSuffix]="suffixTemplate" class="login-input">
           <input class="login-input" nzBorderless type="text" nz-input formControlName="userName" placeholder="請輸入使用者名稱" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="請輸入8-12碼英數符號">
-        <nz-input-group>
-          <input class="login-input" nzBorderless type="password" nz-input formControlName="password" placeholder="請輸入密碼" />
+        <nz-input-group [nzSuffix]="suffixTemplate" class="login-input">
+          <input  nzBorderless [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="請輸入密碼" />
         </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span
+            nz-icon
+            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"
+          ></span>
+          <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
     <div nz-row class="login-form-margin">
@@ -28,8 +36,7 @@
       </div>
     </div>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">登入</button>
-    Or
-    <a>register now!</a>
+    <a>我要註冊</a>
   </form>
 
 </div>

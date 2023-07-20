@@ -1,7 +1,7 @@
 .login-title {
   font-size: 1.7rem;
   padding: 8px 0px 22px;
-  color: rgb(110,144,170);
+  color: #6288a3;
 }
 
 .login-input {
@@ -10,7 +10,7 @@
   padding-left: 0;
 }
 
-.login-input::placeholder {
+.login-input::placeholder, .login-form-remember-text {
   color: #848583;
 }
 
@@ -42,4 +42,13 @@
 .login-form-button.grey-btn {
   color: #92928d;
   background-color: #e8e4e4;
+}
+
+.login-form-other-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-link {
+  color: #235981;
 }

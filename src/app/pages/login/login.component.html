@@ -4,6 +4,13 @@
 
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
+      <nz-form-control nzErrorTip="必填欄位">
+        <nz-input-group [nzAddOnAfter]="suffixTemplate">
+          <input class="login-input" nzBorderless type="text" nz-input formControlName="userName" placeholder="請輸入帳號" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
       <nz-form-control nzErrorTip="請輸入6-20碼英數符號">
         <nz-input-group [nzAddOnAfter]="suffixTemplate">
           <input class="login-input" nzBorderless type="text" nz-input formControlName="userName" placeholder="請輸入使用者名稱" />
@@ -34,16 +41,22 @@
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12">
         <label nz-checkbox formControlName="remember">
-          <span>記住登入帳號</span>
+          <span class="login-form-remember-text">記住登入帳號</span>
         </label>
       </div>
-      <div nz-col [nzSpan]="12">
+      <!-- <div nz-col [nzSpan]="12">
         <a class="login-form-forgot">Forgot password</a>
+      </div> -->
+      <div nz-col [nzSpan]="12">
+        <a class="login-form-forgot text-link">設定簡易登入<span nz-icon nzType="caret-right" nzTheme="fill"></span></a>
       </div>
     </div>
     <button nz-button class="login-form-button login-form-margin blue-btn" [nzType]="'primary'">登入</button>
     <button nz-button class="login-form-button login-form-margin grey-btn" [nzType]="'default'">我要設定使用者名稱</button>
-    <a>我要註冊</a>
+    <div class="login-form-other-links">
+      <a class="text-link">我要註冊<span nz-icon nzType="caret-right" nzTheme="fill"></span></a>
+      <a class="text-link">忘記使用者名稱或密碼<span nz-icon nzType="caret-right" nzTheme="fill"></span></a>
+    </div>
   </form>
 
 </div>

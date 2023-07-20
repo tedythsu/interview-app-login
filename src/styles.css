@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+
+* {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+
 .login-form .ant-input-group-addon {
   background-color: transparent;
   border: none;

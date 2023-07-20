@@ -17,20 +17,20 @@
       <li nz-submenu nzOpen nzTitle="選單一" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">測試</a>
+            <a routerLink="/welcome">展示用</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>測試</a>
+            <a>展示用</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>測試</a>
+            <a>展示用</a>
           </li>
         </ul>
       </li>
       <li nz-submenu nzOpen nzTitle="選單二" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>測試</a>
+            <a>展示用</a>
           </li>
         </ul>
       </li>
@@ -52,7 +52,7 @@
 
     </nz-header>
     <nz-content>
-      <div class="inner-content">
+      <div class="inner-content" *ngIf="isCollapsed">
         <router-outlet></router-outlet>
       </div>
     </nz-content>

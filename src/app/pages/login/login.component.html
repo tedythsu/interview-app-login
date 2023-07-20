@@ -5,24 +5,30 @@
   <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="請輸入6-20碼英數符號">
-        <nz-input-group [nzSuffix]="suffixTemplate" class="login-input">
+        <nz-input-group [nzAddOnAfter]="suffixTemplate">
           <input class="login-input" nzBorderless type="text" nz-input formControlName="userName" placeholder="請輸入使用者名稱" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="請輸入8-12碼英數符號">
-        <nz-input-group [nzSuffix]="suffixTemplate" class="login-input">
-          <input  nzBorderless [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="請輸入密碼" />
+        <nz-input-group [nzAddOnAfter]="suffixTemplate">
+          <input class="login-input" nzBorderless [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="請輸入密碼" />
         </nz-input-group>
+
         <ng-template #suffixTemplate>
-          <span
+          <div class="input-icon">
+            <span
             nz-icon
             [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            nzTheme="fill"
+            style="color: #848583"
             (click)="passwordVisible = !passwordVisible"
           ></span>
-          <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+          </div>
         </ng-template>
+
       </nz-form-control>
     </nz-form-item>
     <div nz-row class="login-form-margin">
@@ -35,7 +41,8 @@
         <a class="login-form-forgot">Forgot password</a>
       </div>
     </div>
-    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">登入</button>
+    <button nz-button class="login-form-button login-form-margin blue-btn" [nzType]="'primary'">登入</button>
+    <button nz-button class="login-form-button login-form-margin grey-btn" [nzType]="'default'">我要設定使用者名稱</button>
     <a>我要註冊</a>
   </form>
 

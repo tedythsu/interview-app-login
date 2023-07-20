@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+.login-form .ant-input-group-addon {
+  background-color: transparent;
+  border: none;
+  padding-right: 0;
+}

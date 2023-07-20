@@ -4,11 +4,19 @@
   color: rgb(110,144,170);
 }
 
-.ant-input-affix-wrapper.login-input {
-  border: none;
-  border-bottom: 1px solid #d4d4d4;
+.login-input {
+  border-bottom: 1px solid #848583;
   border-radius: 0;
   padding-left: 0;
+}
+
+.login-input::placeholder {
+  color: #848583;
+}
+
+.input-icon {
+  display: flex;
+  gap: 8px;
 }
 
 .login-form {
@@ -25,4 +33,13 @@
 
 .login-form-button {
   width: 100%;
+}
+
+.login-form-button.blue-btn {
+  background-color: #08acdc;
+}
+
+.login-form-button.grey-btn {
+  color: #92928d;
+  background-color: #e8e4e4;
 }

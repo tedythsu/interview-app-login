@@ -47,16 +47,18 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
+      <!-- <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <span class="trigger"
-               nz-icon
-               nzType="menu"
-            ></span>
+          <span class="trigger" nz-icon nzType="menu"></span>
         </span>
-        <span *ngIf="isCollapsed" class="header-trigger" (click)="isCollapsed = !isCollapsed">
+        <span class="header-trigger">
           <span>會員登入</span>
-      </span>
+        </span>
+      </div> -->
+
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed" nz-icon nzType="menu"></span>
+        <span class="header-title" *ngIf="isCollapsed" >會員登入</span>
       </div>
 
     </nz-header>

@@ -17,11 +17,17 @@
 }
 
 .header-trigger {
-  height: 64px;
-  padding: 20px 24px;
-  font-size: 20px;
+  /* height: 64px; */
+  /* padding: 20px 24px; */
+  font-size: 18px;
   cursor: pointer;
   transition: all .3s,padding 0s;
+  position: absolute;
+  left: 15px;
+}
+
+.header-title {
+  font-size: 18px;
 }
 
 .trigger:hover {
@@ -67,6 +73,9 @@ nz-header {
   padding: 0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* nz-content {

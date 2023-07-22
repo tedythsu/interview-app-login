@@ -6,6 +6,12 @@
   font-family: 'Noto Sans TC', sans-serif;
 }
 
+.page-title {
+  font-size: 1.7rem;
+  padding: 8px 0px 22px;
+  color: #6288a3;
+}
+
 
 .login-form .ant-input-group-addon {
   background-color: transparent;

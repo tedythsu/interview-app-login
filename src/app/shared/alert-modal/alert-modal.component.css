@@ -1,0 +1,38 @@
+.alert-modal {
+  padding: 25px;
+}
+
+.alert-modal__title {
+  font-size: 18px;
+  text-align: center;
+}
+
+.alert-modal__content {
+  text-align: center;
+}
+
+.alert-modal__footer {
+  display: flex;
+}
+
+.alert-modal__button {
+  flex: 1 0 0;
+  border: 0;
+  height: 35px;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.25s ease;
+}
+
+.alert-modal__button:hover {
+  opacity: 0.75;
+}
+
+.alert-modal__button:focus:focus-visible {
+  outline: none;
+}
+
+.alert-modal__button--primary {
+  color: #FFFFFF;
+  background-color: #08acdc;
+}

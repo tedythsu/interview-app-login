@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 
 interface loginFormErrorTips {
   account: string;
@@ -13,6 +14,9 @@ interface loginFormErrorTips {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild(AlertModalComponent) private alertModalComponent!: AlertModalComponent;
+
   loginForm!: UntypedFormGroup;
   accountVisible = false;
   userNameVisible = false;
@@ -73,4 +77,23 @@ export class LoginComponent implements OnInit {
     this.subscribeToFormChanges();
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.showAlertModal('changeUserNameReminder');
+    }, 0);
+  }
+
+  showAlertModal(info: string) {
+    switch (info) {
+      case 'changeUserNameReminder':
+        this.alertModalComponent.showModal('全面提升帳戶的使用安全', '自108年5月起，登入需輸入【使用者名稱】，請立即前往設定。若您已經設定過，可關閉並略過此提醒。');
+        break;
+      case 'accountReminder':
+        this.alertModalComponent.showModal('', '帳號為您的身分證字號。倘為外籍人士，請填寫投保時於要保書上填寫之號碼，例如：護照號碼/居留證號碼/當地的身分證字號...等');
+        break;
+      case 'userNameReminder':
+        this.alertModalComponent.showModal('全面提升帳戶的使用安全', '自108年5月起，登入安聯e網通需輸入【使用者名稱】，若您尚未設定，請至會員登入頁點選【我要設定使用者名稱】進行設定');
+        break;
+    }
+  }
 }

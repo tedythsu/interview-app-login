@@ -32,7 +32,7 @@
             style="color: #848583"
             (click)="accountVisible = !accountVisible"
           ></span>
-          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+          <span (click)="showAlertModal('accountReminder')" nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
           </div>
         </ng-template>
 
@@ -45,7 +45,7 @@
             style="color: #848583"
             (click)="userNameVisible = !userNameVisible"
           ></span>
-          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+          <span (click)="showAlertModal('userNameReminder')" nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
           </div>
         </ng-template>
 
@@ -78,13 +78,13 @@
       </div>
     </div>
     <button nz-button class="login-form-button login-form-margin blue-btn" [nzType]="'primary'">登入</button>
-    <button nz-button class="login-form-button login-form-margin grey-btn" [nzType]="'default'">我要設定使用者名稱</button>
+    <button routerLink="/change-username" nz-button class="login-form-button login-form-margin grey-btn" [nzType]="'default'">我要設定使用者名稱</button>
     <div class="login-form-other-links">
       <a class="text-link">我要註冊<span nz-icon nzType="caret-right" nzTheme="fill"></span></a>
-      <a class="text-link">忘記使用者名稱或密碼<span nz-icon nzType="caret-right" nzTheme="fill"></span></a>
+      <a class="text-link" routerLink="/forgot-username-or-password">忘記使用者名稱或密碼<span nz-icon nzType="caret-right" nzTheme="fill"></span></a>
     </div>
   </form>
 
 </div>
 
-
+<app-alert-modal></app-alert-modal>

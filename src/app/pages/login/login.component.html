@@ -21,48 +21,46 @@
         <nz-input-group [nzAddOnAfter]="passwordIconTemplate">
           <input class="login-input" nzBorderless [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="請輸入密碼" />
         </nz-input-group>
-
-        <ng-template #accountIconTemplate>
-          <div class="input-icon">
-            <span
-            nz-icon
-            [nzType]="accountVisible ? 'eye-invisible' : 'eye'"
-            nzTheme="fill"
-            style="color: #848583"
-            (click)="accountVisible = !accountVisible"
-          ></span>
-          <span (click)="showAlertModal('accountReminder')" nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
-          </div>
-        </ng-template>
-
-        <ng-template #userNameIconTemplate>
-          <div class="input-icon">
-            <span
-            nz-icon
-            [nzType]="userNameVisible ? 'eye-invisible' : 'eye'"
-            nzTheme="fill"
-            style="color: #848583"
-            (click)="userNameVisible = !userNameVisible"
-          ></span>
-          <span (click)="showAlertModal('userNameReminder')" nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
-          </div>
-        </ng-template>
-
-        <ng-template #passwordIconTemplate>
-          <div class="input-icon">
-            <span
-            nz-icon
-            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-            nzTheme="fill"
-            style="color: #848583"
-            (click)="passwordVisible = !passwordVisible"
-          ></span>
-          <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #FFFFFF"></span>
-          </div>
-        </ng-template>
-
       </nz-form-control>
     </nz-form-item>
+
+    <ng-template #accountIconTemplate>
+      <div class="input-icon">
+        <span
+        nz-icon
+        [nzType]="accountVisible ? 'eye-invisible' : 'eye'"
+        nzTheme="fill"
+        style="color: #848583"
+        (click)="accountVisible = !accountVisible"
+      ></span>
+      <span (click)="showAlertModal('accountReminder')" nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+      </div>
+    </ng-template>
+    <ng-template #userNameIconTemplate>
+      <div class="input-icon">
+        <span
+        nz-icon
+        [nzType]="userNameVisible ? 'eye-invisible' : 'eye'"
+        nzTheme="fill"
+        style="color: #848583"
+        (click)="userNameVisible = !userNameVisible"
+      ></span>
+      <span (click)="showAlertModal('userNameReminder')" nz-icon nzType="info-circle" nzTheme="outline" style="color: #62ceea"></span>
+      </div>
+    </ng-template>
+    <ng-template #passwordIconTemplate>
+      <div class="input-icon">
+        <span
+        nz-icon
+        [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+        nzTheme="fill"
+        style="color: #848583"
+        (click)="passwordVisible = !passwordVisible"
+      ></span>
+      <span nz-icon nzType="info-circle" nzTheme="outline" style="color: #FFFFFF"></span>
+      </div>
+    </ng-template>
+
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12">
         <label nz-checkbox formControlName="remember">

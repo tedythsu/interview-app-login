@@ -12,9 +12,9 @@ export class FakeApiService {
   getMockData(): Observable<any> {
     const mockData = {
       "po_Login_19_2": {
-        "ReturnCode": 0,
-        "ReturnMessage": "",
-        "ReturnMessageTitle": "",
+        "ReturnCode": -14,
+        "ReturnMessage": "錯誤訊息內容: -14",
+        "ReturnMessageTitle": "錯誤訊息標題: -14",
         "TokenMP": "",
         "Token": "BA7F6963-442B-4AC1-A38A-EBEEC1B2516B",
         "Name": "曾 O 永",

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
+import { AlertModalComponent, ButtonInfo } from 'src/app/shared/alert-modal/alert-modal.component';
 import { FakeApiService } from 'src/app/shared/fake-api.service';
 
 interface loginFormErrorTips {
@@ -104,17 +104,31 @@ export class LoginComponent implements OnInit {
   }
 
   showAlertModal(info: string) {
+
+    const modalDetail = {
+      title: '',
+      content: '',
+      buttons: [] as ButtonInfo[]
+    }
+
     switch (info) {
       case 'changeUserNameReminder':
-        this.alert.showModal('全面提升帳戶的使用安全', '自108年5月起，登入需輸入【使用者名稱】，請立即前往設定。若您已經設定過，可關閉並略過此提醒。');
+        modalDetail.title = '全面提升帳戶的使用安全';
+        modalDetail.content = '自108年5月起，登入需輸入【使用者名稱】，請立即前往設定。若您已經設定過，可關閉並略過此提醒。';
+        modalDetail.buttons.push({ text: '關閉', type: 'default', url: '' });
+        modalDetail.buttons.push({ text: '前往設定', type: 'primary', url: '/change-username' });
         break;
       case 'accountReminder':
-        this.alert.showModal('', '帳號為您的身分證字號。倘為外籍人士，請填寫投保時於要保書上填寫之號碼，例如：護照號碼/居留證號碼/當地的身分證字號...等');
+        modalDetail.content = '帳號為您的身分證字號。倘為外籍人士，請填寫投保時於要保書上填寫之號碼，例如：護照號碼/居留證號碼/當地的身分證字號...等';
+        modalDetail.buttons.push({ text: '關閉', type: 'primary', url: '' });
         break;
       case 'userNameReminder':
-        this.alert.showModal('全面提升帳戶的使用安全', '自108年5月起，登入安聯e網通需輸入【使用者名稱】，若您尚未設定，請至會員登入頁點選【我要設定使用者名稱】進行設定');
+        modalDetail.title = '全面提升帳戶的使用安全';
+        modalDetail.content = '自108年5月起，登入安聯e網通需輸入【使用者名稱】，若您尚未設定，請至會員登入頁點選【我要設定使用者名稱】進行設定';
+        modalDetail.buttons.push({ text: '關閉', type: 'primary', url: '' });
         break;
     }
+    this.alert.showModal(modalDetail.title, modalDetail.content, modalDetail.buttons);
   }
 
   getMockData(): void {
@@ -125,15 +139,35 @@ export class LoginComponent implements OnInit {
         const title = data.po_Login_19_2.ReturnMessageTitle;
         const returnMessage = data.po_Login_19_2.ReturnMessage;
 
-        if (returnCode === 0) {
-          console.log('登入成功');
-        } else if (returnCode === -11) {
-          this.alert.showModal(title, returnMessage);
-        } else if (returnCode === -14) {
-          this.alert.showModal(title, returnMessage);
-        } else {
-          this.alert.showModal(title, returnMessage);
+        const modalDetail = {
+          title: '',
+          content: '',
+          buttons: [] as ButtonInfo[]
         }
+
+        switch (returnCode) {
+          case 0:
+            console.log('登入成功');
+            break;
+          case -11:
+            modalDetail.title = title;
+            modalDetail.content = returnMessage;
+            modalDetail.buttons.push({ text: '確認', type: 'primary', url: '/change-password' });
+            break;
+          case -14:
+            modalDetail.title = title;
+            modalDetail.content = returnMessage;
+            modalDetail.buttons.push({ text: '下次再換', type: 'default', url: '' });
+            modalDetail.buttons.push({ text: '密碼變更', type: 'primary', url: '/change-password' });
+            break;
+          default:
+            modalDetail.title = title;
+            modalDetail.content = returnMessage;
+            modalDetail.buttons.push({ text: '確認', type: 'primary', url: '' });
+        }
+
+        this.alert.showModal(modalDetail.title, modalDetail.content, modalDetail.buttons);
+
       },
       error => {
         console.error('Error fetching mock data:', error);

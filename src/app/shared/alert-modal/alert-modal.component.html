@@ -10,8 +10,16 @@
       </div>
     </div>
     <div class="alert-modal__footer">
-      <button (click)="handleCancel()" class="alert-modal__button">關閉</button>
-      <button (click)="handleOk()" class="alert-modal__button alert-modal__button--primary">前往設定</button>
+      <ng-container *ngFor="let button of buttons">
+        <ng-container *ngIf="button.url">
+          <!-- 如果 button.url 有 URL，顯示連結按鈕 -->
+          <button class="alert-modal__button" [routerLink]="button.url" [ngClass]="{'alert-modal__button--primary': button.type === 'primary'}">{{ button.text }}</button>
+        </ng-container>
+        <ng-container *ngIf="!button.url">
+          <!-- 如果 button.url 是空字串或 null，只顯示關閉按鈕 -->
+          <button class="alert-modal__button" [ngClass]="{'alert-modal__button--primary': button.type === 'primary'}" (click)="handleCancel()">{{ button.text }}</button>
+        </ng-container>
+      </ng-container>
     </div>
   </ng-container>
 </nz-modal>

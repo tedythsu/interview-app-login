@@ -3,7 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { AlertModalComponent, ButtonInfo } from 'src/app/shared/alert-modal/alert-modal.component';
 import { FakeApiService } from 'src/app/shared/fake-api.service';
 
-interface loginFormErrorTips {
+interface LoginFormErrors {
   account: string;
   userName: string;
   password: string;
@@ -19,16 +19,19 @@ export class LoginComponent implements OnInit {
   @ViewChild(AlertModalComponent) private alert!: AlertModalComponent;
 
   loginForm!: UntypedFormGroup;
+
+  // Indicates whether the form fields are visible
   accountVisible = false;
   userNameVisible = false;
   passwordVisible = false;
-  mockData: any[] = [];
 
-  loginFormErrorTips: loginFormErrorTips = {
+  loginFormErrors: LoginFormErrors = {
     account: '必填欄位',
     userName: '請輸入6-20碼英數符號',
     password: '請輸入8-12碼英數符號'
   }
+
+  responseBody: any[] = [];
 
   subscribeToFormChanges() {
     this.loginForm.valueChanges.subscribe(() => {
@@ -36,28 +39,28 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // Update error tips for the form fields
   onFormValueChanged() {
     const userNameControl = this.loginForm.get('userName');
     const passwordControl = this.loginForm.get('password');
 
     if (userNameControl?.value !== "" && userNameControl?.value !== null && userNameControl?.invalid) {
-      this.loginFormErrorTips.userName = "輸入長度不符合規則";
+      this.loginFormErrors.userName = "輸入長度不符合規則";
     } else {
-      this.loginFormErrorTips.userName = "請輸入6-20碼英數符號";
+      this.loginFormErrors.userName = "請輸入6-20碼英數符號";
     }
 
     if (passwordControl?.value !== "" && passwordControl?.value !== null && passwordControl?.invalid) {
-      this.loginFormErrorTips.password = "輸入長度不符合規則";
+      this.loginFormErrors.password = "輸入長度不符合規則";
     } else {
-      this.loginFormErrorTips.password = "請輸入8-12碼英數符號";
+      this.loginFormErrors.password = "請輸入8-12碼英數符號";
     }
   }
 
-  submitForm(): void {
+  submitLoginForm(): void {
     if (this.loginForm.valid) {
-      // console.log('submit', this.loginForm.value);
 
-      let requestData = {
+      const requestBody = {
         "pi_CommonData": {
           "SystemID": "42",
           "LoginSystemID": "42"
@@ -72,8 +75,8 @@ export class LoginComponent implements OnInit {
         }
       }
 
-      console.log('requestData:', requestData);
-      this.getMockData();
+      console.log('requestBody:', requestBody);
+      this.login();
     } else {
       Object.values(this.loginForm.controls).forEach(control => {
         if (control.invalid) {
@@ -99,12 +102,11 @@ export class LoginComponent implements OnInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.showAlertModal('changeUserNameReminder');
+      this.showModal('changeUserNameReminder');
     }, 0);
   }
 
-  showAlertModal(info: string) {
-
+  showModal(info: string) {
     const modalDetail = {
       title: '',
       content: '',
@@ -131,10 +133,10 @@ export class LoginComponent implements OnInit {
     this.alert.showModal(modalDetail.title, modalDetail.content, modalDetail.buttons);
   }
 
-  getMockData(): void {
+  login(): void {
     this.fakeApiService.getMockData().subscribe(
       data => {
-        this.mockData = data.po_Login_19_2;
+        this.responseBody = data.po_Login_19_2;
         const returnCode = data.po_Login_19_2.ReturnCode;
         const title = data.po_Login_19_2.ReturnMessageTitle;
         const returnMessage = data.po_Login_19_2.ReturnMessage;
@@ -173,6 +175,6 @@ export class LoginComponent implements OnInit {
         console.error('Error fetching mock data:', error);
       }
     );
-    console.log(this.mockData);
+    console.log(this.responseBody);
   }
 }

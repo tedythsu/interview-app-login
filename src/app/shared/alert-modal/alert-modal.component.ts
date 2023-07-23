@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
-export interface ButtonInfo {
-  text: string;
-  type: string;
-  url: string;
+export interface ModalDetail {
+  title: string;
+  content: string;
+  buttons: {
+    text: string;
+    type: string;
+    url: string;
+  }[]
 }
 
 @Component({
@@ -13,27 +16,23 @@ export interface ButtonInfo {
   styleUrls: ['./alert-modal.component.css']
 })
 export class AlertModalComponent {
+
+  modalVisible: boolean = false;
   title: string = '';
   content: string = '';
-  isVisible: boolean = false;
-  buttons: ButtonInfo[] = [];
+  buttons: ModalDetail['buttons'] = [];
 
-  constructor(private router: Router) {}
+  constructor() {}
 
-  showModal(title: string, content: string, buttons: ButtonInfo[]): void {
-    this.isVisible = true;
+  showModal(title: string, content: string, buttons: ModalDetail['buttons']): void {
+    this.modalVisible = true;
     this.title = title;
     this.content = content;
     this.buttons = buttons;
   }
 
-  handleOk(): void {
-    this.isVisible = false;
-    this.router.navigateByUrl('/change-username');
-  }
-
-  handleCancel(): void {
-    this.isVisible = false;
+  onCancelClick(): void {
+    this.modalVisible = false;
   }
 
 }

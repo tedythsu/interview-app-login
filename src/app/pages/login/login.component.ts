@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { AlertModalComponent, ButtonInfo } from 'src/app/shared/alert-modal/alert-modal.component';
+import { AlertModalComponent, ModalDetail } from 'src/app/shared/alert-modal/alert-modal.component';
 import { FakeApiService } from 'src/app/shared/fake-api.service';
 
 interface LoginFormErrors {
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     password: '請輸入8-12碼英數符號'
   }
 
-  responseBody: any[] = [];
+  responseBody: any;
 
   subscribeToFormChanges() {
     this.loginForm.valueChanges.subscribe(() => {
@@ -107,10 +107,10 @@ export class LoginComponent implements OnInit {
   }
 
   showModal(info: string) {
-    const modalDetail = {
+    let modalDetail: ModalDetail = {
       title: '',
       content: '',
-      buttons: [] as ButtonInfo[]
+      buttons: []
     }
 
     switch (info) {
@@ -137,34 +137,40 @@ export class LoginComponent implements OnInit {
     this.fakeApiService.getMockData().subscribe(
       data => {
         this.responseBody = data.po_Login_19_2;
-        const returnCode = data.po_Login_19_2.ReturnCode;
-        const title = data.po_Login_19_2.ReturnMessageTitle;
-        const returnMessage = data.po_Login_19_2.ReturnMessage;
 
-        const modalDetail = {
+        let modalDetail: ModalDetail = {
           title: '',
           content: '',
-          buttons: [] as ButtonInfo[]
+          buttons: []
         }
 
-        switch (returnCode) {
+        modalDetail.title = this.responseBody.ReturnMessageTitle;
+        modalDetail.content = this.responseBody.ReturnMessage;
+
+        switch (this.responseBody.ReturnCode) {
           case 0:
             console.log('登入成功');
             break;
+          case -1:
+            console.log('Token 不存在');
+            modalDetail.buttons.push({ text: '確認', type: 'primary', url: '' });
+            break;
+          case -2:
+            console.log('Token 逾時');
+            modalDetail.buttons.push({ text: '確認', type: 'primary', url: '' });
+            break;
+          case -3:
+            console.log('此帳號已於其他裝置登入');
+            modalDetail.buttons.push({ text: '確認', type: 'primary', url: '' });
+            break;
           case -11:
-            modalDetail.title = title;
-            modalDetail.content = returnMessage;
             modalDetail.buttons.push({ text: '確認', type: 'primary', url: '/change-password' });
             break;
           case -14:
-            modalDetail.title = title;
-            modalDetail.content = returnMessage;
             modalDetail.buttons.push({ text: '下次再換', type: 'default', url: '' });
             modalDetail.buttons.push({ text: '密碼變更', type: 'primary', url: '/change-password' });
             break;
           default:
-            modalDetail.title = title;
-            modalDetail.content = returnMessage;
             modalDetail.buttons.push({ text: '確認', type: 'primary', url: '' });
         }
 
@@ -175,6 +181,6 @@ export class LoginComponent implements OnInit {
         console.error('Error fetching mock data:', error);
       }
     );
-    console.log(this.responseBody);
+    console.log('responseBody:', this.responseBody);
   }
 }

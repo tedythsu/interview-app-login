@@ -1,5 +1,5 @@
 <nz-modal [nzBodyStyle]="{'padding': '0'}" nzCentered nzClosable="false" [nzFooter]="null" nzWidth="250px"
-  [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  [(nzVisible)]="modalVisible" (nzOnCancel)="onCancelClick()">
   <ng-container *nzModalContent>
     <div class="alert-modal">
       <div class="alert-modal__title">
@@ -12,12 +12,14 @@
     <div class="alert-modal__footer">
       <ng-container *ngFor="let button of buttons">
         <ng-container *ngIf="button.url">
-          <!-- 如果 button.url 有 URL，顯示連結按鈕 -->
-          <button class="alert-modal__button" [routerLink]="button.url" [ngClass]="{'alert-modal__button--primary': button.type === 'primary'}">{{ button.text }}</button>
+          <!-- If button.url has a URL, display the link button -->
+          <button class="alert-modal__button" [routerLink]="button.url"
+            [ngClass]="{'alert-modal__button--primary': button.type === 'primary'}">{{ button.text }}</button>
         </ng-container>
         <ng-container *ngIf="!button.url">
-          <!-- 如果 button.url 是空字串或 null，只顯示關閉按鈕 -->
-          <button class="alert-modal__button" [ngClass]="{'alert-modal__button--primary': button.type === 'primary'}" (click)="handleCancel()">{{ button.text }}</button>
+          <!-- If button.url is an empty string or null, only display the close button -->
+          <button class="alert-modal__button" [ngClass]="{'alert-modal__button--primary': button.type === 'primary'}"
+            (click)="onCancelClick()">{{ button.text }}</button>
         </ng-container>
       </ng-container>
     </div>

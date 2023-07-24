@@ -7,7 +7,7 @@
     <nz-form-item>
       <nz-form-control [nzErrorTip]="loginFormErrors.account">
         <nz-input-group [nzAddOnAfter]="accountIconTemplate">
-          <input class="login-input" nzBorderless [type]="accountVisible ? 'text' : 'password'" nz-input
+          <input (focus)="showAccountValue()" (blur)="hideAccountValue()" class="login-input" nzBorderless [type]="accountVisible ? 'text' : 'password'" nz-input
             formControlName="account" placeholder="請輸入帳號" />
         </nz-input-group>
       </nz-form-control>

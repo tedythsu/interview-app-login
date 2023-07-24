@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
   userNameVisible = false;
   passwordVisible = false;
 
+  accountOriginalValue = '';
+
   loginFormErrors: LoginFormErrors = {
     account: '必填欄位',
     userName: '請輸入6-20碼英數符號',
@@ -66,7 +68,7 @@ export class LoginComponent implements OnInit {
           "LoginSystemID": "42"
         },
         "pi_Login_19_2": {
-          "Acc": this.loginForm.get('account')?.value,
+          "Acc": this.accountOriginalValue,
           "UserID": this.loginForm.get('userName')?.value,
           "UserID2": "",
           "Pw": this.loginForm.get('password')?.value,
@@ -98,6 +100,24 @@ export class LoginComponent implements OnInit {
     }, { updateOn: 'blur' });
 
     this.subscribeToFormChanges();
+  }
+
+  // Method to hide part of the account value and display masked account
+  hideAccountValue(): void {
+    const account = this.loginForm.get('account')?.value;
+    this.accountOriginalValue = account;
+    if (account.length > 7) {
+      const visibleLength = 3;
+      const maskedLength = account.length - visibleLength - 4;
+      const maskedString = "•".repeat(maskedLength);
+      const displayString = account.substring(0, visibleLength) + maskedString + account.substring(account.length - 4);
+      this.loginForm.get('account')?.setValue(displayString);
+    }
+  }
+
+  // Method to show the original account value
+  showAccountValue(): void {
+    this.loginForm.get('account')?.setValue(this.accountOriginalValue);
   }
 
   ngAfterViewInit(): void {
